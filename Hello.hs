@@ -21,3 +21,15 @@ fibonacci n = helper 0 1 n
                        | n == 1 = f2
                        | n > 0  = helper f2 (f1 + f2) (n - 1)
                        | n < 0  = helper (f2 - f1) f1 (n + 1)
+
+roots :: Double -> Double -> Double -> (Double, Double)
+roots a b c = let d = discriminant a b c in (root a b c d, root a b c d) 
+  where root a b c d = (-b + d) / (2 * a)
+        discriminant a b c = sqrt (b * b - 4 * a * c)
+
+seqA :: Integer -> Integer
+seqA n = helper 1 2 3 n
+  where helper a1 a2 a3 n | n == 0 = a1
+                          | n == 1 = a2
+                          | n == 2 = a3
+                          | n > 2  = helper a2 a3 (a2 + a3 - 2 * a1) (n - 1)
